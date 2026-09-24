@@ -1,0 +1,22 @@
+[project]
+name = "agent-loop-inventario-ia-jose-carlos"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "JChuck0", email = "110050395+JChuck0@users.noreply.github.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.141.1",
+    "openai>=3.19.2",
+    "python-dotenv>=1.2.3",
+    "uvicorn>=0.53.0",
+]
+
+[project.scripts]
+agent-loop-inventario-ia-jose-carlos = "agent_loop_inventario_ia_jose_carlos:main"
+
+[build-system]
+requires = ["uv_build>=0.12.18,<0.13.0"]
+build-backend = "uv_build"
