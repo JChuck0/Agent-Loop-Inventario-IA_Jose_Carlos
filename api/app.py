@@ -82,3 +82,17 @@ def update_product_quantity(product_id: int, quantity: int):
 
     # 5. Devolver el producto actualizado
     return product_found
+
+@app.get("/inventory/alerts")
+def get_inventory_alerts():
+
+    alerts = []
+
+    with open("products.csv", "r", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+
+        for product in reader:
+            if int(product["quantity"]) < 10:
+                alerts.append(product)
+
+    return alerts
