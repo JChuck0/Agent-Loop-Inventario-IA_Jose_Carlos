@@ -1,13 +1,27 @@
 from fastapi import FastAPI
 import csv
 from pydantic import BaseModel
+from agent import run_agent
+from fastapi.middleware.cors import CORSMiddleware
 
 class Product(BaseModel):
     name :str
     quantity : int
     unit : str
 
+class  AgentRequest(BaseModel):
+    message : str
+
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://super-system-rqp9qq5rrx9fp654-5500.app.github.dev",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/inventory")
@@ -96,3 +110,13 @@ def get_inventory_alerts():
                 alerts.append(product)
 
     return alerts
+
+
+@app.post("/agent/chat")
+def agent_chat(request: AgentRequest):
+
+    answer = run_agent(request.message)
+
+    return {
+        "message": answer
+    }    
